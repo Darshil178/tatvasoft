@@ -1,29 +1,23 @@
 {
-  "name": "book_store",
+  "name": "bookstore",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^5.0.1",
-    "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.13.3",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "ajv-keywords": "^5.1.0",
-    "axios": "^1.4.0",
-    "fork-ts-checker-webpack-plugin": "^8.0.0",
-    "formik": "^2.4.1",
+    "axios": "^0.27.2",
+    "formik": "^2.2.9",
     "react": "^18.2.0",
-    "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.8.0",
-    "react-router-dom": "^6.11.2",
+    "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
-    "react-toastify": "^9.1.3",
+    "react-toastify": "^7.0.4",
+    "toastify": "^2.0.1",
     "web-vitals": "^2.1.4",
-    "yup": "^1.1.1"
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -48,8 +42,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "tailwindcss": "^3.3.2"
   }
 }

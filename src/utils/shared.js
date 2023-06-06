@@ -1,7 +1,25 @@
-import { Role } from "./enum";
+import cartService from "../service/cart.service";
+import { Role, RoutePaths } from "./enum";
+
+const addToCart = async (book, id) => {
+  return cartService
+    .add({
+      userId: id,
+      bookId: book.id,
+      quantity: 1,
+    })
+    .then((res) => {
+      return { error: false, message: "Item added in cart" };
+    })
+    .catch((e) => {
+      if (e.status === 500)
+        return { error: true, message: "Item already in the cart" };
+      else return { error: true, message: "something went wrong" };
+    });
+};
 
 const messages = {
-  USER_DELETE: "are you sure you want to delete the user?",
+  USER_DELETE: "Are you sure you want to delete this user?",
   UPDATED_SUCCESS: "Record updated successfully",
   UPDATED_FAIL: "Record cannot be updated",
   DELETE_SUCCESS: "Record deleted successfully",
@@ -16,22 +34,22 @@ const LocalStorageKeys = {
 const NavigationItems = [
   {
     name: "Users",
-    route: "/user",
-    access: [Role.Admin, Role.Seller],
+    route: RoutePaths.User,
+    access: [Role.Admin],
   },
   {
     name: "Categories",
-    route: "/categories",
-    access: [Role.Admin, Role.Seller],
+    route: RoutePaths.Category,
+    access: [Role.Admin],
   },
   {
-    name: "Book",
-    route: "/book",
+    name: "Books",
+    route: RoutePaths.Book,
     access: [Role.Admin, Role.Seller],
   },
   {
     name: "Update Profile",
-    route: "/update-profile",
+    route: RoutePaths.UpdateProfile,
     access: [Role.Admin, Role.Buyer, Role.Seller],
   },
 ];
@@ -49,8 +67,11 @@ const hasAccess = (pathname, user) => {
   return true;
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   hasAccess,
-  NavigationItems,
+  addToCart,
+  messages,
   LocalStorageKeys,
+  NavigationItems,
 };

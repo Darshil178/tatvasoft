@@ -1,48 +1,42 @@
 import {
-  Button,
   Dialog,
-  DialogActions,
+  DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogTitle,
-} from "@mui/material";
+  DialogActions,
+  Button,
+} from "@material-ui/core";
 
 const ConfirmationDialog = (props) => {
   const { open, onClose, onConfirm, title, description } = props;
   return (
-    <Dialog open={open} onClose={() => onClose()}>
-      <DialogTitle>{title}</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={() => onClose()}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+      className="cancel-popup"
+    >
+      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>{description}</DialogContentText>
+        <DialogContentText id="alert-dialog-description">
+          {description}
+        </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button
-          variant="contained"
+          type="button"
           onClick={() => onClose()}
-          sx={{
-            color: "white",
-            backgroundColor: "#f14d54",
-            "&:hover": {
-              backgroundColor: "#f14d54",
-            },
-            marginLeft: "8px",
-            width: "100px",
-          }}
+          className="btn pink-btn"
         >
-          Cancle
+          Cancel
         </Button>
         <Button
-          variant="contained"
-          onClick={() => onConfirm()}
-          sx={{
-            color: "white",
-            backgroundColor: "#80BF32",
-            "&:hover": {
-              backgroundColor: "#80BF32",
-            },
-            marginLeft: "8px",
-            width: "100px",
+          onClick={() => {
+            onConfirm();
           }}
+          autoFocus
+          className="btn green-btn"
         >
           Ok
         </Button>

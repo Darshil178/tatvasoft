@@ -9,23 +9,18 @@ const getAll = async (params) => {
   });
 };
 
-const getById = async (id) => {
-  const url = `${ENDPOINT}/byId?id=${id}`;
+const searchBook = async (searchText) => {
+  const url = `${ENDPOINT}/search?keyword=${searchText}`;
   return request.get(url).then((res) => {
     return res;
   });
 };
 
-const searchBook = async (searchText) => {
-  const url = `${ENDPOINT}/search?keyword=${searchText}`;
-  return request
-    .get(url)
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+const getById = async (id) => {
+  const url = `${ENDPOINT}/byId?id=${id}`;
+  return request.get(url).then((res) => {
+    return res;
+  });
 };
 
 const deleteBook = async (id) => {
@@ -49,11 +44,6 @@ const save = async (data) => {
   }
 };
 
-const bookService = {
-  getAll,
-  getById,
-  deleteBook,
-  save,
-  searchBook,
-};
+const bookService = { getAll, getById, deleteBook, save, searchBook };
+
 export default bookService;

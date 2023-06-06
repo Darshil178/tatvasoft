@@ -2,16 +2,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const request = axios.create({
-  //  baseURL: "https://web1.anasource.com/BookStore/api/BookStore/", // url = base url + request url
-  //   baseURL: "http://localhost:5000/",
   baseURL: "https://book-e-sell-node-api.vercel.app/",
-  // baseURL: "https://helperland1.azurewebsites.net/",
-  // baseURL: "https://helperland1.azurewebsites.net/",
-  //  baseURL: "http://192.168.1.20/",
-  timeout: 12400000,
+  timeout: 500000,
   responseType: "json",
 });
-// https://book-edsad-sell-node-api.vercel.app/api/user/roles
+
 let requests = [];
 let conflictRequest = "";
 
@@ -20,12 +15,11 @@ request.interceptors.request.use(
   async (config) => {
     if (config.headers) {
       config.headers["Content-Type"] = "application/json";
-      config.headers["lang"] = "en";
     }
 
     if (config.headers["isDisableLoader"] !== true) {
       requests.push(config.url);
-      showLoader();
+      // showLoader();
     }
 
     return config;
@@ -58,24 +52,11 @@ request.interceptors.response.use(
   }
 );
 
-function showLoader() {
-  document.body.classList.add("loader-open");
-}
-
-function hideLoader() {
-  document.body.classList.remove("loader-open");
-}
-
 // remove completed request
 function removeRequest(req) {
   const i = requests.indexOf(req);
   if (i >= 0) {
     requests.splice(i, 1);
-  }
-  if (requests.length > 0) {
-    showLoader();
-  } else {
-    hideLoader();
   }
   if (req === conflictRequest) {
     conflictRequest = "";

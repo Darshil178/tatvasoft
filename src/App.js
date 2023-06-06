@@ -1,24 +1,41 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import React from "react";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { theme } from "./utils/theme";
+import "./assets/css/style.css";
+import Footer from "./components/footer/index";
+import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Footer from "./Components/Footer";
-import Header from "./Components/Header";
-import Searchbar from "./Components/Searchbar";
-import { AuthWarpper } from "./context/auth";
+import "react-toastify/dist/ReactToastify.css";
+import MainNavigation from "./components/MainNavigation";
+import { AuthWrapper } from "./context/auth";
+import loader from "../src/assets/images/loader.gif";
+import { CartWrapper } from "./context/cart";
+import Header from "./components/header";
 
-import MyNavigation from "./MyNavigation";
-
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
-      <AuthWarpper>
-        <ToastContainer />
-        <Header />
-        <Searchbar />
-        <MyNavigation />
-        <Footer />
-      </AuthWarpper>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <React.Suspense fallback={<></>}>
+        <BrowserRouter>
+          <AuthWrapper>
+            <CartWrapper>
+              <div className="loader-wrapper">
+                <img src={loader} alt="loader" />
+              </div>
+              <div className="wrapper">
+                <Header />
+                <main>
+                  <MainNavigation />
+                </main>
+                <Footer />
+              </div>
+              <ToastContainer />
+            </CartWrapper>
+          </AuthWrapper>
+        </BrowserRouter>
+      </React.Suspense>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
